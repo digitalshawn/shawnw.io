@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shawn Walker, PhD — Arizona State University</title>
-<meta name="description" content="Shawn Walker is Assistant Professor of Social Data Science in the School of Social and Behavioral Sciences at Arizona State University. information scientist studying misinformation, platform governance, and AI ethics through large-scale digital trace data.">
+<meta name="description" content="Shawn Walker is Assistant Professor of Social Data Science in the School of Social and Behavioral Sciences at Arizona State University. Computational social scientist studying misinformation, platform governance, and AI ethics through large-scale digital trace data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -42,6 +42,13 @@
               text-transform:uppercase;color:var(--ink);text-decoration:none}
   .indexnav a:hover{color:var(--accent);text-decoration:none}
   @media(max-width:760px){.indexnav{display:none}}
+  .menubtn{display:none;background:none;border:0;font-size:22px;cursor:pointer;color:var(--ink);padding:4px 8px}
+  @media(max-width:760px){
+    .menubtn{display:block}
+    .mast .wrap{position:relative}
+    .indexnav.open{display:flex;flex-direction:column;gap:0;position:absolute;top:100%;right:0;left:0;background:var(--paper);border-bottom:2px solid var(--ink);padding:8px 0;z-index:50}
+    .indexnav.open a{padding:10px 22px;font-size:13px}
+  }
 
   /* ---------- hero ---------- */
   .hero{padding:88px 0 72px;border-bottom:2px solid var(--ink)}
@@ -54,6 +61,7 @@
            font-size:clamp(58px,11vw,146px);line-height:.94;letter-spacing:-.02em;margin-bottom:26px}
   .role{font-size:18px;font-weight:500;max-width:640px}
   .tagline{font-size:17px;color:var(--dim);max-width:620px;margin-top:14px}
+
 
   /* ---------- contact bar ---------- */
   .contactbar{border-bottom:1px solid var(--ink);padding:13px 0}
@@ -152,7 +160,7 @@
 <nav class="mast" aria-label="Index">
   <div class="wrap">
     <a class="brand" href="#top">Shawn Walker<span class="m">,</span> PhD</a>
-    <div class="indexnav">
+    <div class="indexnav" id="mobilenav">
       <a href="#about"><span class="n">01</span> About</a>
       <a href="#research"><span class="n">02</span> Research</a>
       <a href="#news"><span class="n">03</span> News</a>
@@ -160,6 +168,7 @@
       <a href="#teaching"><span class="n">05</span> Teaching</a>
       <a href="WalkerCV.pdf"><span class="n">06</span> CV</a>
     </div>
+    <button class="menubtn" id="menubtn" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
 </nav>
 
@@ -432,6 +441,20 @@
     <div class="fine"><span>© 2026 Shawn Walker</span><span>shawnw.io</span></div>
   </div>
 </footer>
+
+<script>
+document.getElementById('menubtn').addEventListener('click', function(){
+  var nav = document.getElementById('mobilenav');
+  var open = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.getElementById('mobilenav').addEventListener('click', function(e){
+  if(e.target.closest('a')){
+    this.classList.remove('open');
+    document.getElementById('menubtn').setAttribute('aria-expanded','false');
+  }
+});
+</script>
 
 </body>
 </html>
